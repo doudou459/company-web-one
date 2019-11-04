@@ -1,7 +1,7 @@
 <template>
 <div>
   <div class="myContant" >
-    <img class="logoImg" src="../img/超维鱼.png">
+    <img class="logoImg" src="../assets/超维鱼.png">
  <div class='selectMenu'>
    <el-menu 
   :default-active="this.$route.path"
@@ -23,26 +23,10 @@
 
 export default{
   name:'mfooterButton-text',
+  props:['buttonText'],
   data:function(){
     return{
-     buttonText:[
-      {
-         label:'name1',
-         router:'/'
-      },
-            {
-         label:'name2',
-         router:'/a'
-      },
-            {
-         label:'name3',
-         router:'/b'
-      },
-          {
-         label:'name4',
-         router:''
-      }
-     ]
+
     }
   }
 }

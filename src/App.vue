@@ -2,7 +2,7 @@
   <div id="app">
 <el-container >
   <el-header class="el-header-pc" v-if='this.$store.state.pcTop' >
-          <pcTopBtn v-if='this.$store.state.pcTop' ></pcTopBtn>     
+          <pcTopBtn v-bind:buttonText="this.$store.state.buttonText" v-if='this.$store.state.pcTop' ></pcTopBtn>     
   </el-header>
   <el-header class="el-header-m" v-if='this.$store.state.mFooter' >
       {{this.$store.state.companyName}}
@@ -15,8 +15,8 @@
   <el-footer class='pcFooter' v-if='this.$store.state.pcFooter'>
 
   </el-footer>
-  <el-footer class='mFooter' v-else-if='this.$store.state.mFooter'>
-   <mfooterBtn></mfooterBtn>
+  <el-footer  class='mFooter' v-else-if='this.$store.state.mFooter'>
+   <mfooterBtn v-bind:buttonText="this.$store.state.buttonText"></mfooterBtn>
   </el-footer>
 </el-container>
 
@@ -30,7 +30,7 @@ export default{
   name:'app',
   data:function(){
     return{
-
+    
     }
     
   },
@@ -41,7 +41,6 @@ export default{
   created(){
       this.$store.commit('showFooter');
       this.$store.commit('setMainHeight');
-      this.$store.commit("setMyDatas");
     }
 }
 </script>
@@ -85,9 +84,6 @@ export default{
    }
    .myContant{
      width:100%;
-     max-width:1000px;
-     margin-left:auto;
-     margin-right:auto;
    }
 .el-container{
   background-color:rgb(232, 232, 232);

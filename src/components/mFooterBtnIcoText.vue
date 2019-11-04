@@ -8,7 +8,7 @@
   router
   active-text-color="#ffd04b" >
   <el-menu-item  v-for="item in buttonText" v-bind:key="item.router"  v-bind:index="item.router" style='flex: 1;' >
-    <i v-bind:class='item.ico'></i>  
+    <!-- <i v-bind:class='item.ico'></i>   -->
     <span>{{item.label}}</span>
   </el-menu-item>
 </el-menu>
@@ -17,25 +17,10 @@
 
 export default{
   name:'mfooterButton-text',
+  props:['buttonText'],
   data:function(){
     return{
-     buttonText:[
-      {
-         ico:'el-icon-edit',
-         label:'name1',
-         router:'/'
-      },
-            {
-         ico:'el-icon-share',
-         label:'name2',
-         router:'/a'
-      },
-            {
-         ico:'el-icon-delete',
-         label:'name3',
-         router:'/b'
-      }
-     ]
+
     }
   },
 

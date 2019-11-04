@@ -12,7 +12,24 @@ export default new Vuex.Store({
    mFooter:false,
    pcTop:false,
    maiHeight:document.documentElement.clientHeight,
-   myDatas:[]
+   buttonText:[
+    {
+       label:'首页',
+       router:'/m'
+    },
+    {
+       label:'主营业务',
+       router:'/business'
+    },
+    {
+       label:'在线体验',
+       router:'/case'
+    },
+    {
+       label:'联系方式',
+       router:'/contact'
+    }
+   ]
   },
   mutations: {
   setMainHeight:function(){
@@ -33,13 +50,7 @@ export default new Vuex.Store({
     }else{
     this.state.mFooter=true;
   }
-  },
-  setMyDatas:function(){
-    let data =[{"ID":1,"name":"jack","year":2019},{"ID":2,"name":"nick","year":2019},{"ID":3,"name":"lucy","year":2019},{"ID":4,"name":"tom","year":2019}];
-    let idName = "ID"
-    this.state.myDatas = new dataModel(JSON.stringify(data),idName);
-  }
-  
+  },  
   },
   actions: {
 
