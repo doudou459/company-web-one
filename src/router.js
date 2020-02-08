@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import m from "./views/m.vue";
+import indexweb from "./views/indexweb.vue";
 import business from "./views/business.vue";
 import casedemo from "./views/case.vue";
 import contact from "./views/contact.vue";
@@ -14,9 +14,9 @@ export default new Router({
   base: process.env.BASE_URL,
   routes: [
     {
-      path: '/m',
-      name: 'm',
-      component: m
+      path: '/indexweb',
+      name: 'indexweb',
+      component: indexweb
     },
     {
       path: '/business',

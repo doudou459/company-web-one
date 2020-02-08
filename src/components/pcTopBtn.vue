@@ -36,7 +36,7 @@ export default{
      width: 10%;
 
      float: left;
-     margin-left: 20%;
+     margin-left: 15%;
    }
    .myContant{
     width:100%;

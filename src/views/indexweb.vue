@@ -9,7 +9,7 @@
 import dataModel from'../js/dataModel';
 import chaoweifish from'../assets/超维鱼.png';
 export default{
-  name:'m',
+  name:'index',
   data:function(){
     return{
       pictures:new dataModel([{"ID":1,src:chaoweifish},{"ID":2,src:chaoweifish},{"ID":3,src:chaoweifish},{"ID":4,src:chaoweifish}])

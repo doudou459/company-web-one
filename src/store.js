@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import dataModel from'./js/dataModel'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -15,7 +14,7 @@ export default new Vuex.Store({
    buttonText:[
     {
        label:'首页',
-       router:'/m'
+       router:'/indexweb'
     },
     {
        label:'主营业务',
