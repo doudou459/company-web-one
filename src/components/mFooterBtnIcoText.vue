@@ -40,6 +40,7 @@ export default{
   flex-direction:column;
   line-height: 20px !important;
   font-size: 16px !important;
+      padding:0px!important;
 }
 
 

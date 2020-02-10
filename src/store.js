@@ -14,7 +14,7 @@ export default new Vuex.Store({
    buttonText:[
     {
        label:'首页',
-       router:'/indexweb'
+       router:'/'
     },
     {
        label:'主营业务',
