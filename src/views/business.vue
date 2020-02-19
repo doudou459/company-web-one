@@ -1,29 +1,59 @@
 <template>
   <div>
-    <div class="business" v-bind:style="{'height':this.$store.state.maiHeight+'px'}">
+    <div class="mainBody" v-bind:style="{'height':this.$store.state.maiHeight+'px'}">
       <div class="cardBody">
-        <el-row>
-          <el-col v-for="item in producesData.datas" :key="item.ID" :span="8">
-            <el-card shadow="hover">
-              <el-image @click="showDrawer(item.detail)"
-                style="width: 100%; height: 100%"
+        <div v-if="this.$store.state.pcFooter" class="indexPicDiv">
+          <el-row :gutter="30" class="imgRowPC">
+            <el-col :span="8" v-for="item in producesData.datas" :key="item.ID"  class="pcCol">
+              <el-image
+                style="width: 100%;"
                 :src="getDownloadUrl(item.pictureUrl)"
                 fit="fill"
+                class="imgItemPC"
+                @click="showDrawer(item.detail)"
               ></el-image>
-            </el-card>
+            </el-col>
+          </el-row>
+        </div>
+        <el-row v-else-if="this.$store.state.mFooter" class="imgRow">
+          <el-col :span="24" v-for="item in producesData.datas" :key="item.ID">
+            <el-image
+              style="width: 100%;"
+              :src="getDownloadUrl(item.pictureUrl)"
+              fit="fill"
+              class="imgItem"
+              @click="showDrawer(item.detail)"
+            ></el-image>
           </el-col>
         </el-row>
       </div>
     </div>
-  <el-drawer
-  :visible.sync="drawer"
-  :with-header="false">
- <div v-html="produceDetail"></div>
-</el-drawer>
-
+    <el-drawer
+      direction="ltr"
+      :visible.sync="drawer"
+      :with-header="false"
+      :show-close="true"
+      :size="drawerSize"
+      :destroy-on-close="true"
+      :append-to-body="true"
+    >
+      <div
+        v-html="produceDetail"
+        class="detailDiv"
+        :class="{topMargin40:this.$store.state.pcFooter}"
+        v-bind:style="{'height':this.$store.state.maiHeight+'px'}"
+      ></div>
+      <div class="imgzoom_pack">
+        <div class="imgzoom_x">X</div>
+        <div class="imgzoom_img">
+          <img />
+        </div>
+      </div>
+    </el-drawer>
   </div>
 </template>
 <script>
+import scale from "../assets/scale";
 export default {
   data: function() {
     return {
@@ -31,22 +61,48 @@ export default {
         ["ID", "title", "pictureUrl", "detail"],
         "ID"
       ),
-      drawer:false,
-      produceDetail:""
+      drawer: false,
+      produceDetail: "",
+      drawerSize: this.$store.state.mFooter ? "100%" : "36%"
     };
   },
   methods: {
     getDownloadUrl: function(name) {
       return "/service/downloadImg?fileName=" + name;
     },
-    showDrawer:function(detail){
-      this.produceDetail=detail
-      this.drawer=true;      
+    showDrawer: function(detail) {
+      this.produceDetail = detail;
+      this.drawer = true;
+      setTimeout(function() {
+        scale.ImagesZoom.init({
+          elem: ".listImg"
+        });
+      }, 1000);
     }
+  },
+
+  mounted() {},
+  created() {
+    let me = this;
+    this.$ajax
+      .get("/service/getProduces")
+      .then(function(res) {
+        if (res.data && res.data.length > 0) {
+          me.producesData.loadData(res.data);
+        }
+      })
+      .catch(function(error) {
+        me.$message({
+          showClose: true,
+          message: error,
+          type: "error"
+        });
+      });
   }
 };
 </script>
 <style lang="less" scoped>
+@import "../assets/scale.css";
 .cardBody {
   width: 75%;
   height: 80%;
@@ -57,8 +113,51 @@ export default {
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: #ffffff;
+  overflow: auto;
 }
-.business {
+.mainBody {
   position: relative;
+}
+.imgRow {
+  margin-top: 15px;
+  padding: 8px;
+}
+.imgRowPC {
+  margin-top: 15px;
+  padding: 15px 30px 15px 30px;
+}
+.imgItemPC {
+  border-radius: 15px;
+  height: 270px;
+}
+.imgItemPC:active {
+  box-shadow: 0px 0px 5px 5px rgb(20, 20, 20, 0.5);
+}
+.imgItemPC:hover {
+  box-shadow: 0px 0px 5px 5px rgba(20, 20, 20, 0.5);
+}
+.imgItem {
+  border-radius: 8px;
+  height: 200px;
+}
+.indexPicDiv {
+  margin-left: 15px;
+  margin-right: 15px;
+}
+.detailDiv {
+  margin-left: 3px;
+  margin-right: 3px;
+  padding-left: 10px;
+  padding-right: 15px;
+  overflow: auto;
+  border-top-style: inset;
+  border-top-color: aliceblue;
+  border-top-width: thin;
+}
+.topMargin40 {
+  margin-top: 40px;
+}
+.pcCol{
+  margin-bottom: 10px;
 }
 </style>

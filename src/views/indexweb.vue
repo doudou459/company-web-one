@@ -12,7 +12,7 @@
  <el-row :gutter="30"   class="imgRowPC">
   <el-col :span="8" v-for="item in index_img.datas" :key="item.ID"  >
                 <el-image
-       style="width: 100%; height: 100%"
+       style="width: 100%;"
       :src="getDownloadUrl(item.url)"
       fit="fill" class="imgItemPC"></el-image>
   </el-col>
@@ -21,7 +21,7 @@
  <el-row v-else-if="this.$store.state.mFooter"  class="imgRow" >
   <el-col :span="24" v-for="item in index_img.datas" :key="item.ID" >
            <el-image
-       style="width: 100%; height: 100%"
+       style="width: 100%;"
       :src="getDownloadUrl(item.url)"
       fit="fill" class="imgItem"></el-image>
   </el-col>
@@ -94,6 +94,7 @@ padding:15px 30px 15px 30px;
 }
 .imgItemPC{
   border-radius: 15px;
+  height: 270px;
 }
 .imgItemPC:active{
   box-shadow: 0px 0px 5px 5px rgb(20, 20, 20,0.5);
@@ -103,6 +104,7 @@ padding:15px 30px 15px 30px;
 }
 .imgItem{
     border-radius: 8px;
+    height: 200px;
 }
 .el-col-24{
   margin-top:5px;
