@@ -1,6 +1,6 @@
 <template>
 <div>
-  <el-carousel indicator-position="none"  :height='this.$store.state.pcTop?"500px":"240px"'>
+  <el-carousel indicator-position="none"  :height="this.$store.state.carouselHeight+'px'">
     <el-carousel-item v-for="item in getCarouselImg(carousel_img.datas)" :key="item.ID">
       <el-image
        style="width: 100%; height: 100%"
@@ -12,7 +12,7 @@
  <el-row :gutter="30"   class="imgRowPC">
   <el-col :span="8" v-for="item in index_img.datas" :key="item.ID"  >
                 <el-image
-       style="width: 100%;"
+       :style="{'height':imgHeight+'px'}"
       :src="getDownloadUrl(item.url)"
       fit="fill" class="imgItemPC"></el-image>
   </el-col>
@@ -21,7 +21,7 @@
  <el-row v-else-if="this.$store.state.mFooter"  class="imgRow" >
   <el-col :span="24" v-for="item in index_img.datas" :key="item.ID" >
            <el-image
-       style="width: 100%;"
+       :style="{'height':imgHeight+'px'}"
       :src="getDownloadUrl(item.url)"
       fit="fill" class="imgItem"></el-image>
   </el-col>
@@ -34,7 +34,8 @@ export default{
   data:function(){
     return{
       carousel_img:new this.$dataModel(["ID","showType","title","url"],"ID"),
-      index_img:new this.$dataModel(["ID","title","url"],"ID")
+      index_img:new this.$dataModel(["ID","title","url"],"ID"),
+      imgHeight:this.$store.state.imgHeight
     }
   },
 created(){
@@ -93,18 +94,20 @@ margin-top:15px;
 padding:15px 30px 15px 30px;
 }
 .imgItemPC{
+  width: 100%;
   border-radius: 15px;
-  height: 270px;
-}
-.imgItemPC:active{
   box-shadow: 0px 0px 5px 5px rgb(20, 20, 20,0.5);
 }
-.imgItemPC:hover{
-  box-shadow: 0px 0px 5px 5px rgba(20, 20, 20,0.5);
-}
+// .imgItemPC:active{
+//   box-shadow: 0px 0px 5px 5px rgb(20, 20, 20,0.5);
+// }
+// .imgItemPC:hover{
+//   box-shadow: 0px 0px 5px 5px rgba(20, 20, 20,0.5);
+// }
 .imgItem{
-    border-radius: 8px;
-    height: 200px;
+  width: 100%;
+  border-radius: 8px;
+  box-shadow: 0px 0px 5px 5px rgb(20, 20, 20,0.5);    
 }
 .el-col-24{
   margin-top:5px;

@@ -11,6 +11,8 @@ export default new Vuex.Store({
    mFooter:false,
    pcTop:false,
    maiHeight:document.documentElement.clientHeight,
+   imgHeight:200,
+   carouselHeight:600,
    buttonText:[
     {
        label:'首页',
@@ -43,15 +45,22 @@ export default new Vuex.Store({
 
   },
   showFooter:function(){
-    if(this.state.fullwidth>767){
+    if(this.state.fullwidth>1024){
      this.state.pcFooter=true;
      this.state.pcTop=true;
     }else{
     this.state.mFooter=true;
   }
   },  
+  setImgHeight:function(){
+    if(this.state.fullwidth>1024){
+      this.state.carouselHeight=600;
+      this.state.imgHeight=270;
+    }else{
+      this.state.carouselHeight=parseInt(240*this.state.fullwidth/375); 
+      this.state.imgHeight=parseInt(200*this.state.fullwidth/375);
+    }
+  }
   },
-  actions: {
 
-  },
 })

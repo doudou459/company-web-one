@@ -1,13 +1,14 @@
 <template>
   <div>
     <div class="mainBody" v-bind:style="{'height':this.$store.state.maiHeight+'px'}">
-      <div class="cardBody">
+      <div :class="{cardBody:this.$store.state.pcFooter,cardBodym:this.$store.state.mFooter}">
+         <h1 v-if="showDips"  style="position: absolute;margin: auto;top: 50%;left: 50%;transform: translate(-50%, -50%);"     >敬请期待···</h1>
         <div v-if="this.$store.state.pcFooter" class="indexPicDiv">
           <el-row :gutter="30" class="imgRowPC">
             <el-col :span="8" v-for="item in producesData.datas" :key="item.ID"  class="pcCol">
               <el-image
-                style="width: 100%;"
                 :src="getDownloadUrl(item.pictureUrl)"
+                 :style="{'height':imgHeight+'px'}"
                 fit="fill"
                 class="imgItemPC"
                 @click="showDrawer(item.detail)"
@@ -18,8 +19,8 @@
         <el-row v-else-if="this.$store.state.mFooter" class="imgRow">
           <el-col :span="24" v-for="item in producesData.datas" :key="item.ID">
             <el-image
-              style="width: 100%;"
               :src="getDownloadUrl(item.pictureUrl)"
+               :style="{'height':imgHeight+'px'}"
               fit="fill"
               class="imgItem"
               @click="showDrawer(item.detail)"
@@ -63,7 +64,9 @@ export default {
       ),
       drawer: false,
       produceDetail: "",
-      drawerSize: this.$store.state.mFooter ? "100%" : "36%"
+      drawerSize: this.$store.state.mFooter ? "100%" : "36%",
+      imgHeight:this.$store.state.imgHeight,
+      showDips:true
     };
   },
   methods: {
@@ -80,8 +83,6 @@ export default {
       }, 1000);
     }
   },
-
-  mounted() {},
   created() {
     let me = this;
     this.$ajax
@@ -89,6 +90,7 @@ export default {
       .then(function(res) {
         if (res.data && res.data.length > 0) {
           me.producesData.loadData(res.data);
+          me.showDips=false;
         }
       })
       .catch(function(error) {
@@ -115,11 +117,22 @@ export default {
   background-color: #ffffff;
   overflow: auto;
 }
+.cardBodym {
+  width: 90%;
+  height: 90%;
+  box-shadow: 0px 0px 5px 5px rgb(20, 20, 20, 0.5);
+  position: absolute;
+  margin: auto;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #ffffff;
+  overflow: auto;
+}
 .mainBody {
   position: relative;
 }
 .imgRow {
-  margin-top: 15px;
   padding: 8px;
 }
 .imgRowPC {
@@ -128,7 +141,7 @@ export default {
 }
 .imgItemPC {
   border-radius: 15px;
-  height: 270px;
+  width: 100%;
 }
 .imgItemPC:active {
   box-shadow: 0px 0px 5px 5px rgb(20, 20, 20, 0.5);
@@ -138,7 +151,7 @@ export default {
 }
 .imgItem {
   border-radius: 8px;
-  height: 200px;
+  width: 100%;
 }
 .indexPicDiv {
   margin-left: 15px;

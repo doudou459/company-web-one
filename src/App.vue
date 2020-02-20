@@ -48,6 +48,7 @@ export default {
   created() {
     this.$store.commit("showFooter");
     this.$store.commit("setMainHeight");
+    this.$store.commit("setImgHeight");
   }
 };
 </script>
