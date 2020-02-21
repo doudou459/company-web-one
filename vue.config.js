@@ -5,7 +5,7 @@ devServer: {
     open: false, //配置自动启动浏览器
     proxy: {
       '/service': {//对service路径进行代理
-          target: 'http://chaoweifish.com/companyweb',  // service路径代理的请求
+          target: 'http://chaoweifish.com/service',  // service路径代理的请求
           ws: false,  // proxy websockets 
           changeOrigin: true,  // 是否跨域
           pathRewrite: {
