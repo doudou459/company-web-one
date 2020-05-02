@@ -20,7 +20,7 @@
 		init: function(param){
 			var self   = this,
 				params = param || {};
-			var imgList   = document.querySelectorAll( "img"+params.elem ),
+			var imgList   = document.querySelectorAll( params.elem +" img"),
 				zoomMask  = document.querySelector(".imgzoom_pack"),
 				zoomImg   = document.querySelector(".imgzoom_pack .imgzoom_img img"),
 				zoomClose = document.querySelector(".imgzoom_pack .imgzoom_x"),

@@ -49,8 +49,12 @@ export default class dataModel {
             json.myLoadJsonDatas[key] = '';
             Object.defineProperty(json, key, {
               set:function (val) {
-                json.userOperateState = "edit";
+                if(val==json.myLoadJsonDatas[key]){
+                  json.myLoadJsonDatas[key] = val;
+                }else{
+                 json.userOperateState = "edit";
                  json.myLoadJsonDatas[key] = val;
+                } 
               },
               get:function () {
                 return json.myLoadJsonDatas[key];
